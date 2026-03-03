@@ -1,6 +1,7 @@
 // src/features/tasks/TaskList.jsx
 import React, { useState } from "react";
 import TaskItem from "./TaskItem";
+import "./TaskList.css";
 
 function TaskList() {
   const [tasks, setTasks] = useState([
@@ -57,14 +58,13 @@ function TaskList() {
   };
 
   return (
-    <div style={{ marginTop: "2rem" }}>
-      <form onSubmit={handleAddTask} style={{ marginBottom: "1rem" }}>
+    <div className="task-list-container">
+      <form className="task-form" onSubmit={handleAddTask}>
         <input
           type="text"
           placeholder="Title"
           value={newTask.title}
           onChange={(e) => setNewTask({ ...newTask, title: e.target.value })}
-          style={{ marginRight: "0.5rem" }}
         />
         <input
           type="text"
@@ -73,12 +73,10 @@ function TaskList() {
           onChange={(e) =>
             setNewTask({ ...newTask, description: e.target.value })
           }
-          style={{ marginRight: "0.5rem" }}
         />
         <select
           value={newTask.priority}
           onChange={(e) => setNewTask({ ...newTask, priority: e.target.value })}
-          style={{ marginRight: "0.5rem" }}
         >
           <option>High</option>
           <option>Medium</option>

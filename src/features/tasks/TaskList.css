@@ -1,0 +1,47 @@
+.task-list-container {
+  max-width: 700px;
+  margin: 20px auto;
+  padding: 20px;
+  /* background-color: #f0f4f8; */
+   background: linear-gradient(135deg, #e0f0ff, #f0f4f8);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  font-family: 'Arial', sans-serif;
+}
+
+.task-form {
+  display: flex;
+  flex-wrap: wrap; 
+  gap: 10px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.task-form input,
+.task-form select {
+  padding: 8px 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  flex: 1 1 200px;      /* grow, shrink, base width */
+  font-size: 14px;
+}
+
+.task-form button {
+  padding: 10px 15px;
+  /* background-color: #28a745; */
+  background-color: #007bff; /* match header */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  flex: 0 0 auto;         /* button keeps natural width */
+  transition: background 0.2s;
+}
+
+.task-form button:hover {
+  /* background-color: #218838; */
+  background-color: #0069d9;
+}

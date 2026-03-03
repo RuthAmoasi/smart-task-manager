@@ -1,0 +1,149 @@
+.task-card {
+  background-color: white;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  display: inline-block;
+  width: 100%;
+  box-sizing: border-box;
+  transition: transform 0.2s, box-shadow 0.2s;
+  animation: fadeInSlide 0.3s ease forwards;
+}
+
+.task-card:hover {
+  transform: translateY(-3px);           /* slight lift */
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15); /* stronger shadow */
+}
+
+.task-card.removing {
+  animation: fadeOutSlide 0.3s ease forwards;
+}
+
+.task-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.task-title {
+  font-size: 18px;
+  margin: 0;
+  flex: 1
+}
+
+.task-title.completed {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+.task-description {
+  margin: 0 0 10px 0;
+  color: #555;
+}
+
+.task-buttons {
+  display: flex;
+  gap: 5px;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.task-buttons button {
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.task-buttons button:hover {
+  transform: scale(1.05); /* slightly larger on hover */
+}
+
+@media(min-width: 600px) {
+  .task-buttons {
+    flex-direction: row; /* horizontal layout on wider screens */
+  }
+  
+  .task-buttons button {
+    width: auto;         /* reset button width */
+  }
+}
+
+.complete-btn {
+  background-color: #28a745;
+  color: white;
+}
+
+.complete-btn:hover {
+  background-color: #218838;
+}
+
+.undo-btn {
+  background-color: #007bff;
+  color: white;
+}
+
+.undo-btn:hover {
+  background-color: #0069d9;
+}
+
+.delete-btn {
+  background-color: #dc3545;
+  color: white;
+}
+
+.delete-btn:hover {
+  background-color: #c82333;
+}
+
+.priority-badge {
+  padding: 2px 8px;
+  border-radius: 5px;
+  font-size: 12px;
+  color: white;
+  margin-left: 10px;
+  white-space: nowrap;
+  transition: transform 0.2s;
+}
+
+.priority-badge:hover {
+  transform: scale(1.1);
+}
+
+.priority-high {
+  background-color: #dc3545;
+}
+
+.priority-medium {
+  background-color: #fd7e14;
+}
+
+.priority-low {
+  background-color: #28a745;
+}
+
+@keyframes fadeInSlide {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOutSlide {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+}
