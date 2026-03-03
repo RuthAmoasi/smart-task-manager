@@ -70,3 +70,9 @@
   background-color: #007bff !important;
   color: white;
 }
+
+.task-count {
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
+}

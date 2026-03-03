@@ -66,6 +66,8 @@ function TaskList() {
     return true;
   });
 
+  const activeTaskCount = tasks.filter((task) => !task.completed).length;
+
   return (
     <div className="task-list-container">
       <form className="task-form" onSubmit={handleAddTask}>
@@ -115,6 +117,10 @@ function TaskList() {
         >
           Completed
         </button>
+
+        <p className="task-count">
+          {activeTaskCount} Active Task{activeTaskCount !== 1 ? "s" : ""}
+        </p>
       </div>
 
       {filteredTasks.map((task) => (
