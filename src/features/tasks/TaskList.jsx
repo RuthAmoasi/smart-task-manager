@@ -31,6 +31,8 @@ function TaskList() {
     priority: "Medium",
   });
 
+  const [filter, setFilter] = useState("all");
+
   // Function to remove a task
   const removeTask = (id) => {
     setTasks(tasks.filter((task) => task.id !== id));
@@ -51,11 +53,18 @@ function TaskList() {
     const taskToAdd = {
       id: Date.now(),
       ...newTask,
+      completed: false,
     };
 
     setTasks([...tasks, taskToAdd]);
     setNewTask({ title: "", description: "", priority: "Medium" });
   };
+
+  const filteredTasks = tasks.filter((task) => {
+    if (filter === "completed") return task.completed;
+    if (filter === "active") return !task.completed;
+    return true;
+  });
 
   return (
     <div className="task-list-container">
@@ -84,7 +93,31 @@ function TaskList() {
         </select>
         <button type="submit">Add Task</button>
       </form>
-      {tasks.map((task) => (
+
+      <div className="filter-buttons">
+        <button
+          className={filter === "all" ? "active-filter" : ""}
+          onClick={() => setFilter("all")}
+        >
+          All
+        </button>
+
+        <button
+          className={filter === "active" ? "active-filter" : ""}
+          onClick={() => setFilter("active")}
+        >
+          Active
+        </button>
+
+        <button
+          className={filter === "completed" ? "active-filter" : ""}
+          onClick={() => setFilter("completed")}
+        >
+          Completed
+        </button>
+      </div>
+
+      {filteredTasks.map((task) => (
         <TaskItem
           key={task.id}
           task={task}
