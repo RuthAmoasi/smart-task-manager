@@ -35,6 +35,14 @@ function TaskList() {
     setTasks(tasks.filter((task) => task.id !== id));
   };
 
+  const toggleComplete = (id) => {
+    setTasks(
+      tasks.map((task) =>
+        task.id === id ? { ...task, completed: !task.completed } : task,
+      ),
+    );
+  };
+
   const handleAddTask = (e) => {
     e.preventDefault(); // prevent page reload
     if (!newTask.title || !newTask.description) return;
@@ -79,7 +87,12 @@ function TaskList() {
         <button type="submit">Add Task</button>
       </form>
       {tasks.map((task) => (
-        <TaskItem key={task.id} task={task} removeTask={removeTask} />
+        <TaskItem
+          key={task.id}
+          task={task}
+          removeTask={removeTask}
+          toggleComplete={toggleComplete}
+        />
       ))}
     </div>
   );
