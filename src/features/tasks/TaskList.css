@@ -111,6 +111,20 @@
   color: #333;
 }
 
+.sort-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.sort-container select {
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
 .clear-completed-btn {
   padding: 6px 12px;
   margin-left: 10px;

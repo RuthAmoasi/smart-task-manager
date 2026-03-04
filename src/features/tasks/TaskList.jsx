@@ -47,6 +47,8 @@ function TaskList() {
 
   const [filter, setFilter] = useState("all");
 
+  const [sortOption, setSortOption] = useState("none"); // "priority", "deadline", or "none"
+
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
@@ -93,6 +95,19 @@ function TaskList() {
 
   const clearCompleted = () => {
     setTasks(tasks.filter((task) => !task.completed));
+  };
+
+  const sortTasks = (tasksArray) => {
+    const sorted = [...tasksArray]; // copy so we don’t mutate original
+    if (sortOption === "priority") {
+      const priorityOrder = { High: 1, Medium: 2, Low: 3 };
+      sorted.sort(
+        (a, b) => priorityOrder[a.priority] - priorityOrder[b.priority],
+      );
+    } else if (sortOption === "deadline") {
+      sorted.sort((a, b) => new Date(a.deadline) - new Date(b.deadline));
+    }
+    return sorted;
   };
 
   return (
@@ -154,6 +169,18 @@ function TaskList() {
           </button>
         </div>
 
+        <div className="sort-container">
+          <label>Sort by: </label>
+          <select
+            value={sortOption}
+            onChange={(e) => setSortOption(e.target.value)}
+          >
+            <option value="none">None</option>
+            <option value="priority">Priority</option>
+            <option value="deadline">Deadline</option>
+          </select>
+        </div>
+
         <p className="task-count">
           {activeTaskCount} Active Task{activeTaskCount !== 1 ? "s" : ""}
         </p>
@@ -163,7 +190,7 @@ function TaskList() {
         </button>
       </div>
 
-      {filteredTasks.map((task) => (
+      {sortTasks(filteredTasks).map((task) => (
         <TaskItem
           key={task.id}
           task={task}
