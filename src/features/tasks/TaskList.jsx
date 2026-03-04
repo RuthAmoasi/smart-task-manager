@@ -9,18 +9,27 @@ const defaultTasks = [
     title: "Finish React tutorial",
     description: "Learn component architecture",
     priority: "High",
+    deadline: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
+      .toISOString()
+      .slice(0, 10),
   },
   {
     id: 2,
     title: "Read about Git best practices",
     description: "Understand commits and branches",
     priority: "Medium",
+    deadline: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
+      .toISOString()
+      .slice(0, 10),
   },
   {
     id: 3,
     title: "Plan project folder structure",
     description: "Setup components, features, pages",
     priority: "High",
+    deadline: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
+      .toISOString()
+      .slice(0, 10),
   },
 ];
 
@@ -62,6 +71,11 @@ function TaskList() {
     const taskToAdd = {
       id: Date.now(),
       ...newTask,
+      deadline:
+        newTask.deadline ||
+        new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
+          .toISOString()
+          .slice(0, 10),
       completed: false,
     };
 
@@ -106,6 +120,13 @@ function TaskList() {
           <option>Medium</option>
           <option>Low</option>
         </select>
+
+        <input
+          type="date"
+          value={newTask.deadline || ""}
+          onChange={(e) => setNewTask({ ...newTask, deadline: e.target.value })}
+        />
+
         <button type="submit">Add Task</button>
       </form>
 

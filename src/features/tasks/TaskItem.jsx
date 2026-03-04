@@ -14,6 +14,10 @@ function TaskItem({ task, removeTask, toggleComplete }) {
     }, 300); // Must match CSS animation duration
   };
 
+  const daysLeft = Math.ceil(
+    (new Date(task.deadline) - new Date()) / (1000 * 60 * 60 * 24),
+  );
+
   return (
     <div className={`task-card ${isRemoving ? "removing" : ""}`}>
       <div className="task-header">
@@ -28,6 +32,12 @@ function TaskItem({ task, removeTask, toggleComplete }) {
       </div>
 
       <p className="task-description">{task.description}</p>
+
+      <p className={`days-left ${daysLeft < 0 ? "overdue" : ""}`}>
+        {daysLeft >= 0
+          ? `${daysLeft} day${daysLeft !== 1 ? "s" : ""} left`
+          : "Overdue"}
+      </p>
 
       <div className="task-buttons">
         <button
