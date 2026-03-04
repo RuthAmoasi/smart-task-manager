@@ -68,6 +68,10 @@ function TaskList() {
 
   const activeTaskCount = tasks.filter((task) => !task.completed).length;
 
+  const clearCompleted = () => {
+    setTasks(tasks.filter((task) => !task.completed));
+  };
+
   return (
     <div className="task-list-container">
       <form className="task-form" onSubmit={handleAddTask}>
@@ -96,31 +100,37 @@ function TaskList() {
         <button type="submit">Add Task</button>
       </form>
 
-      <div className="filter-buttons">
-        <button
-          className={filter === "all" ? "active-filter" : ""}
-          onClick={() => setFilter("all")}
-        >
-          All
-        </button>
+      <div className="task-controls">
+        <div className="filter-buttons">
+          <button
+            className={filter === "all" ? "active-filter" : ""}
+            onClick={() => setFilter("all")}
+          >
+            All
+          </button>
 
-        <button
-          className={filter === "active" ? "active-filter" : ""}
-          onClick={() => setFilter("active")}
-        >
-          Active
-        </button>
+          <button
+            className={filter === "active" ? "active-filter" : ""}
+            onClick={() => setFilter("active")}
+          >
+            Active
+          </button>
 
-        <button
-          className={filter === "completed" ? "active-filter" : ""}
-          onClick={() => setFilter("completed")}
-        >
-          Completed
-        </button>
+          <button
+            className={filter === "completed" ? "active-filter" : ""}
+            onClick={() => setFilter("completed")}
+          >
+            Completed
+          </button>
+        </div>
 
         <p className="task-count">
           {activeTaskCount} Active Task{activeTaskCount !== 1 ? "s" : ""}
         </p>
+
+        <button className="clear-completed-btn" onClick={clearCompleted}>
+          Clear Completed
+        </button>
       </div>
 
       {filteredTasks.map((task) => (

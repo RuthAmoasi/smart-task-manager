@@ -46,6 +46,40 @@
   background-color: #0069d9;
 }
 
+.task-controls {
+  display: flex;
+  align-items: center;      /* vertically align items */
+  /* gap: 20px; */
+  justify-content: space-between;
+  margin-bottom: 15px;      /* space below controls */
+  flex-wrap: wrap;           /* wrap if screen is small */
+}
+
+.task-controls .filter-buttons {
+  display: flex;
+  gap: 10px;                 /* space between filter buttons */
+}
+
+.task-controls .task-count {
+  font-weight: bold;
+  color: #333;
+  margin: 0;                 /* remove default p margin */
+}
+
+.task-controls .clear-completed-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #dc3545;
+  color: white;
+  transition: all 0.2s ease;
+}
+
+.task-controls .clear-completed-btn:hover {
+  background-color: #c82333;
+}
+
 .filter-buttons {
   display: flex;
   gap: 10px;
@@ -75,4 +109,19 @@
   font-weight: bold;
   margin-bottom: 10px;
   color: #333;
+}
+
+.clear-completed-btn {
+  padding: 6px 12px;
+  margin-left: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #dc3545;
+  color: white;
+  transition: all 0.2s ease;
+}
+
+.clear-completed-btn:hover {
+  background-color: #c82333;
 }
