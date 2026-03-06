@@ -2,8 +2,12 @@
 import React, { useState } from "react";
 import "./TaskItem.css";
 
-function TaskItem({ task, removeTask, toggleComplete }) {
+function TaskItem({ task, removeTask, toggleComplete, updateTask }) {
   const [isRemoving, setIsRemoving] = useState(false);
+
+  const [isEditing, setIsEditing] = useState(false);
+
+  const [editedTask, setEditedTask] = useState(task);
 
   const handleRemove = () => {
     setIsRemoving(true);
@@ -17,6 +21,71 @@ function TaskItem({ task, removeTask, toggleComplete }) {
   const daysLeft = Math.ceil(
     (new Date(task.deadline) - new Date()) / (1000 * 60 * 60 * 24),
   );
+
+  if (isEditing) {
+    return (
+      <div className={`task-card edit-mode ${isRemoving ? "removing" : ""}`}>
+        <div className="task-header">
+          <input
+            className="edit-title"
+            type="text"
+            value={editedTask.title}
+            autoFocus
+            onChange={(e) =>
+              setEditedTask({ ...editedTask, title: e.target.value })
+            }
+          />
+
+          <select
+            className="edit-priority"
+            value={editedTask.priority}
+            onChange={(e) =>
+              setEditedTask({ ...editedTask, priority: e.target.value })
+            }
+          >
+            <option>High</option>
+            <option>Medium</option>
+            <option>Low</option>
+          </select>
+        </div>
+
+        <textarea
+          className="edit-description"
+          value={editedTask.description}
+          onChange={(e) =>
+            setEditedTask({ ...editedTask, description: e.target.value })
+          }
+        />
+
+        <div className="edit-deadline">
+          <label>Deadline:</label>
+          <input
+            type="date"
+            value={editedTask.deadline || ""}
+            onChange={(e) =>
+              setEditedTask({ ...editedTask, deadline: e.target.value })
+            }
+          />
+        </div>
+
+        <div className="task-buttons">
+          <button
+            className="save-btn"
+            onClick={() => {
+              updateTask(editedTask);
+              setIsEditing(false);
+            }}
+          >
+            Save
+          </button>
+
+          <button className="cancel-btn" onClick={() => setIsEditing(false)}>
+            Cancel
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={`task-card ${isRemoving ? "removing" : ""}`}>
@@ -47,12 +116,11 @@ function TaskItem({ task, removeTask, toggleComplete }) {
           {task.completed ? "Undo" : "Complete"}
         </button>
 
-        {/* <button className="delete-btn" onClick={() => removeTask(task.id)}>
-          Remove Task
-        </button> */}
         <button className="delete-btn" onClick={handleRemove}>
           Remove Task
         </button>
+
+        <button onClick={() => setIsEditing(true)}>Edit</button>
       </div>
     </div>
   );

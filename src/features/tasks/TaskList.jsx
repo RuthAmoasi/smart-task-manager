@@ -110,6 +110,12 @@ function TaskList() {
     return sorted;
   };
 
+  const updateTask = (updatedTask) => {
+    setTasks(
+      tasks.map((task) => (task.id === updatedTask.id ? updatedTask : task)),
+    );
+  };
+
   return (
     <div className="task-list-container">
       <form className="task-form" onSubmit={handleAddTask}>
@@ -196,6 +202,7 @@ function TaskList() {
           task={task}
           removeTask={removeTask}
           toggleComplete={toggleComplete}
+          updateTask={updateTask}
         />
       ))}
     </div>
